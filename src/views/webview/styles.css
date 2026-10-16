@@ -88,6 +88,20 @@ label.field {
   color: var(--vscode-foreground, #ccc);
   margin: var(--cs-field-gap) 0 5px;
 }
+.checkbox-field {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin: var(--cs-field-gap) 0 5px;
+}
+.checkbox-field label.field {
+  margin: 0;
+}
+.checkbox-field input[type=checkbox] {
+  flex: 0 0 auto;
+  margin: 0;
+}
 select,
 input[type=text],
 input[type=password],

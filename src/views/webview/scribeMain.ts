@@ -80,7 +80,15 @@ function group(id: string, title: string, open = true): HTMLElement {
 }
 function field(parent: HTMLElement, key: ScribeSettingKey, title: string, rows?: number): void {
     const spec = SCRIBE_SETTINGS[key];
-    const label = element('label', title); label.className = 'field'; label.htmlFor = key; parent.appendChild(label);
+    const label = element('label', title); label.className = 'field'; label.htmlFor = key;
+    const checkboxRow = spec.type === 'boolean' ? element('div') : undefined;
+    if (checkboxRow) {
+        checkboxRow.className = 'checkbox-field';
+        checkboxRow.appendChild(label);
+        parent.appendChild(checkboxRow);
+    } else {
+        parent.appendChild(label);
+    }
     let input: Control;
     if ('enum' in spec) {
         const select = element('select');
@@ -101,7 +109,9 @@ function field(parent: HTMLElement, key: ScribeSettingKey, title: string, rows?:
     }
     input.id = key;
     watch(input, () => { dirty.set(key, ++revision); });
-    controls.set(key, input); parent.appendChild(input);
+    controls.set(key, input);
+    if (checkboxRow) {checkboxRow.appendChild(input);}
+    else {parent.appendChild(input);}
     const hint = element('div', spec.description); hint.className = 'hint'; parent.appendChild(hint); hints.set(key, hint);
 }
 function render(): void {
