@@ -1,0 +1,241 @@
+{
+  "name": "commitscribe",
+  "displayName": "CommitScribe",
+  "description": "中文 AI 提交说明助手：可编辑系统提示词，支持 Responses 与 Chat Completions。",
+  "version": "0.1.9",
+  "publisher": "local-commitscribe",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "activationEvents": [
+    "onCommand:commitscribe.generateCommitMessage",
+    "onView:commitscribe.settings"
+  ],
+  "categories": [
+    "Machine Learning",
+    "Programming Languages",
+    "AI"
+  ],
+  "keywords": [
+    "Machine Learning",
+    "Programming Languages",
+    "AI Assistant",
+    "AI",
+    "AutoCommit",
+    "LLM",
+    "Git",
+    "Ollama"
+  ],
+  "icon": "icons/icon.png",
+  "main": "./dist/extension.js",
+  "capabilities": {
+    "virtualWorkspaces": {
+      "supported": false,
+      "description": "需要本地 Git 仓库来读取代码差异。"
+    },
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "生成提交说明；不执行自动提交和推送。",
+      "restrictedConfigurations": [
+        "commitScribe.api.url"
+      ]
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "commitscribe.generateCommitMessage",
+        "title": "生成提交说明",
+        "category": "CommitScribe",
+        "icon": "$(sparkle)"
+      },
+      {
+        "command": "commitscribe.openSettings",
+        "title": "打开管理面板",
+        "category": "CommitScribe",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "commitscribe.cancelGeneration",
+        "title": "停止生成提交说明",
+        "category": "CommitScribe",
+        "icon": "$(commitscribe-stop)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "commitscribe",
+          "title": "CommitScribe",
+          "icon": "icons/sparkle.svg"
+        }
+      ]
+    },
+    "views": {
+      "commitscribe": [
+        {
+          "type": "webview",
+          "id": "commitscribe.settings",
+          "name": "管理面板"
+        }
+      ]
+    },
+    "menus": {
+      "scm/title": [
+        {
+          "when": "scmProvider == git && !commitscribe.generating",
+          "command": "commitscribe.generateCommitMessage",
+          "group": "navigation@0"
+        },
+        {
+          "when": "scmProvider == git && commitscribe.generating",
+          "command": "commitscribe.cancelGeneration",
+          "group": "navigation@0"
+        },
+        {
+          "when": "scmProvider == git",
+          "command": "commitscribe.openSettings",
+          "group": "1_config@1"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "commitscribe.generateCommitMessage",
+        "key": "ctrl+g",
+        "mac": "cmd+g",
+        "when": "scmProvider == git"
+      }
+    ],
+    "configuration": {
+      "title": "CommitScribe",
+      "properties": {
+        "commitScribe.api.url": {
+          "type": "string",
+          "default": "",
+          "description": "接口基础地址或完整请求 URL。基础地址会按请求格式追加 /responses 或 /chat/completions。",
+          "order": 1
+        },
+        "commitScribe.api.model": {
+          "type": "string",
+          "default": "",
+          "description": "服务端提供的模型 ID，手动填写。",
+          "order": 2
+        },
+        "commitScribe.api.format": {
+          "type": "string",
+          "default": "responses",
+          "enum": [
+            "responses",
+            "chat"
+          ],
+          "enumDescriptions": [
+            "Responses API",
+            "Chat Completions API"
+          ],
+          "description": "请求与响应使用的协议。",
+          "order": 3
+        },
+        "commitScribe.commit.systemPrompt": {
+          "type": "string",
+          "default": "你是一名 Git 提交说明助手，请根据提供的代码差异，用简体中文生成一条准确、简洁的提交说明。\n\n规则：\n1. 使用 Conventional Commits 格式：type(可选 scope): summary。\n2. 根据实际改动选择 feat、fix、refactor、perf、docs、test、build、ci、chore 或 revert。\n3. 标题简洁概括改动，通常不超过 50 个字符。小改动只写标题。\n4. 必要时添加正文，以 - 开头列出关键点，最多 5 条，每条尽量不超过 50 个字符。\n5. 说明改动的目的或效果，避免逐行复述差异或罗列所有文件。\n6. 只输出一条提交说明，不要开场白、解释、结束语、Markdown 标题、加粗或代码块。\n7. 不编造代码差异中无法确认的功能、测试结果或修复效果。",
+          "editPresentation": "multilineText",
+          "description": "完整系统提示词。编辑后原样发送，不再追加隐藏的字数或格式规则。留空表示不发送系统提示词。",
+          "order": 4
+        },
+        "commitScribe.commit.customInstructions": {
+          "type": "string",
+          "default": "",
+          "editPresentation": "multilineText",
+          "description": "可选的补充要求，随代码差异放在用户消息中。",
+          "order": 5
+        },
+        "commitScribe.apiRequestTimeout": {
+          "type": "number",
+          "default": 60,
+          "minimum": -1,
+          "description": "API 请求超时（秒），-1 表示不限制。",
+          "order": 10
+        },
+        "commitScribe.gitTimeout": {
+          "type": "number",
+          "default": 120,
+          "minimum": -1,
+          "description": "Git 操作超时（秒），-1 表示不限制。",
+          "order": 11
+        },
+        "commitScribe.general.maxDiffSize": {
+          "type": "number",
+          "default": 100000,
+          "minimum": -1,
+          "description": "发送的差异最大字符数；-1 表示不截断，正数范围为 1000 至 1000000。",
+          "order": 12
+        },
+        "commitScribe.general.stream": {
+          "type": "boolean",
+          "default": true,
+          "description": "开启后边生成边填入提交说明；关闭后等待完整结果，再一次性填入。下一次生成生效。",
+          "order": 9.5
+        },
+        "commitScribe.general.temperature": {
+          "type": "number",
+          "default": -1,
+          "minimum": -1,
+          "maximum": 2,
+          "description": "采样温度，-1 表示不发送该参数，使用模型默认值。",
+          "order": 13
+        },
+        "commitScribe.general.maxOutputTokens": {
+          "type": "number",
+          "default": 4096,
+          "minimum": 1,
+          "maximum": 131072,
+          "description": "最大输出 token 数，包括推理模型的思考预算。",
+          "order": 14
+        },
+        "commitScribe.api.reasoningEffort": {
+          "type": "string",
+          "default": "",
+          "description": "留空、默认或 default 表示不发送；也可自行填写接口支持的思考强度单词。",
+          "order": 3.5
+        }
+      }
+    },
+    "icons": {
+      "commitscribe-stop": {
+        "description": "Stop commit message generation",
+        "default": {
+          "fontPath": "icons/trae-stop.ttf",
+          "fontCharacter": "\\4f2e"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "node esbuild.js --production",
+    "vscode:prepublish:tsc": "tsc -p ./",
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "build:prod": "node esbuild.js --production",
+    "build:analyze": "node esbuild.js --production --analyze",
+    "package": "vsce package --no-dependencies --allow-missing-repository --skip-license --out release/",
+    "package:notsc": "npm run vscode:prepublish:tsc && npm run package",
+    "package:analyze": "npm run build:analyze && npm run package",
+    "typecheck": "tsc --noEmit",
+    "prepackage": "node -e \"require('fs').mkdirSync('release', { recursive: true })\""
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "@types/vscode": "^1.93.0",
+    "@vscode/vsce": "^4.0.0",
+    "esbuild": "^0.28.2",
+    "typescript": "^6.0.3"
+  },
+  "overrides": {
+    "serialize-javascript": "^7.0.5",
+    "diff": "^8.0.3"
+  }
+}

@@ -1,0 +1,10 @@
+/*
+
+!/.gitignore
+!/.vscodeignore
+!/package.json
+!/package-lock.json
+!/tsconfig.json
+!/esbuild.js
+!/icons/
+!/src/

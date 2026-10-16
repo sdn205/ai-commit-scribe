@@ -1,0 +1,8 @@
+**
+!package.json
+!icons/icon.png
+!dist/extension.js
+!dist/webview/main.js
+!dist/webview/styles.css
+!icons/sparkle.svg
+!icons/trae-stop.ttf
