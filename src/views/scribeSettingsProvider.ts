@@ -24,7 +24,7 @@ export class ScribeSettingsProvider implements vscode.WebviewViewProvider {
             '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
             '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src ' + view.webview.cspSource +
             '; script-src \'nonce-' + nonce + '\';"><link rel="stylesheet" href="' + style + '">' +
-            '<title>CommitScribe 管理面板</title></head><body><div id="root">正在加载…</div>' +
+            '<title>AICommitScribe 管理面板</title></head><body><div id="root">正在加载…</div>' +
             '<script nonce="' + nonce + '" src="' + script + '"></script></body></html>';
         const subscriptions = [
             view.webview.onDidReceiveMessage((message: unknown) => {

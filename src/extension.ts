@@ -20,7 +20,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         }),
         vscode.commands.registerCommand('commitscribe.openSettings', () => vscode.commands.executeCommand('commitscribe.settings.focus')),
     );
-    Logger.log('CommitScribe 已启动');
+    Logger.log('AICommitScribe 已启动');
 }
 export async function deactivate(): Promise<void> {
     CommitWorkflow.cancelGeneration();

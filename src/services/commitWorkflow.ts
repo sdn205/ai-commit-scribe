@@ -53,7 +53,7 @@ export class CommitWorkflow {
                 if (signal.aborted || this.active.get(repoPath!) !== controller) {return;}
                 inputWriter.write(text);
             };
-            await vscode.window.withProgress({ location: vscode.ProgressLocation.SourceControl, title: 'CommitScribe' }, async (progress) => {
+            await vscode.window.withProgress({ location: vscode.ProgressLocation.SourceControl, title: 'AICommitScribe' }, async (progress) => {
                     signal.throwIfAborted();
                     progress.report({ message: '正在分析改动…' });
                     const run = async (): Promise<void> => {

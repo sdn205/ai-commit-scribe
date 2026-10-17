@@ -29,7 +29,7 @@ export class Logger {
     }
 
     static initialize(): void {
-        this.channel = vscode.window.createOutputChannel('CommitScribe', { log: true });
+        this.channel = vscode.window.createOutputChannel('AICommitScribe', { log: true });
         this.channel.info('Logger initialized');
     }
 
@@ -51,7 +51,7 @@ export class Logger {
     }
 
     static async showError(message: string, ...actions: string[]): Promise<string | undefined> {
-        return await vscode.window.showErrorMessage(`CommitScribe: ${this.redact(message)}`, ...actions);
+        return await vscode.window.showErrorMessage(`AICommitScribe: ${this.redact(message)}`, ...actions);
     }
 
     static dispose(): void {

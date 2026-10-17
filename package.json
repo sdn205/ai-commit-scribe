@@ -1,6 +1,6 @@
 {
-  "name": "commitscribe",
-  "displayName": "CommitScribe",
+  "name": "ai-commit-scribe",
+  "displayName": "AICommitScribe",
   "description": "中文 AI 提交说明助手：可编辑系统提示词，支持 Responses 与 Chat Completions。",
   "version": "0.1.9",
   "publisher": "local-commitscribe",
@@ -49,19 +49,19 @@
       {
         "command": "commitscribe.generateCommitMessage",
         "title": "生成提交说明",
-        "category": "CommitScribe",
+        "category": "AICommitScribe",
         "icon": "$(sparkle)"
       },
       {
         "command": "commitscribe.openSettings",
         "title": "打开管理面板",
-        "category": "CommitScribe",
+        "category": "AICommitScribe",
         "icon": "$(gear)"
       },
       {
         "command": "commitscribe.cancelGeneration",
         "title": "停止生成提交说明",
-        "category": "CommitScribe",
+        "category": "AICommitScribe",
         "icon": "$(commitscribe-stop)"
       }
     ],
@@ -69,7 +69,7 @@
       "activitybar": [
         {
           "id": "commitscribe",
-          "title": "CommitScribe",
+          "title": "AICommitScribe",
           "icon": "icons/sparkle.svg"
         }
       ]
@@ -111,7 +111,7 @@
       }
     ],
     "configuration": {
-      "title": "CommitScribe",
+      "title": "AICommitScribe",
       "properties": {
         "commitScribe.api.url": {
           "type": "string",
@@ -237,5 +237,13 @@
   "overrides": {
     "serialize-javascript": "^7.0.5",
     "diff": "^8.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sdn205/ai-commit-scribe.git"
+  },
+  "homepage": "https://github.com/sdn205/ai-commit-scribe#readme",
+  "bugs": {
+    "url": "https://github.com/sdn205/ai-commit-scribe/issues"
   }
 }

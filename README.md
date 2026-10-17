@@ -1,4 +1,4 @@
-# AI Commit Scribe
+# AICommitScribe
 
 在 VS Code 中，根据 Git 代码改动一键生成提交说明。
 
@@ -22,7 +22,7 @@ fix(auth): 修复登录状态过期后无法重新登录的问题
 
 需要 VS Code **1.93.0 或更高版本**、可用的 Git，以及一个支持上述请求格式的模型服务。
 
-拿到扩展的 `.vsix` 安装包后：
+从 [GitHub Releases](https://github.com/sdn205/ai-commit-scribe/releases/latest) 下载 `ai-commit-scribe-版本号.vsix` 安装包后：
 
 1. 打开 VS Code 的扩展面板。
 2. 点击右上角的 **…**，选择 **从 VSIX 安装…**（Install from VSIX）。
@@ -40,7 +40,6 @@ code --install-extension <扩展安装包.vsix>
 
 打开一个本地 Git 仓库，通过源代码管理面板菜单中的 **打开管理面板** 配置接口。也可以在命令面板中搜索该命令。
 
-> 当前版本的扩展界面和命令分类仍显示为 `CommitScribe`。
 
 | 配置项 | 填写说明 |
 | --- | --- |
@@ -126,7 +125,7 @@ feat(settings): 支持保存和切换多套接口配置
 
 ### 请求失败或没有生成结果怎么办？
 
-先检查 API URL、请求格式、模型 ID 和密钥是否匹配。请求超时可以适当增加超时设置；提示输出被截断时，可以增加最大输出 token 数。也可以打开 VS Code 的 **输出** 面板，查看 `CommitScribe` 日志。
+先检查 API URL、请求格式、模型 ID 和密钥是否匹配。请求超时可以适当增加超时设置；提示输出被截断时，可以增加最大输出 token 数。也可以打开 VS Code 的 **输出** 面板，查看 `AICommitScribe` 日志。
 
 ### 哪些内容会发送给模型服务？
 
