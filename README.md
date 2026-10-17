@@ -4,9 +4,8 @@
 
 默认使用简体中文和 Conventional Commits 格式，支持自定义模型、API 接口与系统提示词。生成结果直接填入源代码管理的提交输入框，检查或修改后即可提交。
 
-```text
-fix(auth): 修复登录状态过期后无法重新登录的问题
-```
+
+![AICommitScribe 生成提交说明演示](docs/image/demo.gif)
 
 ## 功能
 
@@ -40,6 +39,7 @@ code --install-extension <扩展安装包.vsix>
 
 打开一个本地 Git 仓库，通过源代码管理面板菜单中的 **打开管理面板** 配置接口。也可以在命令面板中搜索该命令。
 
+![AICommitScribe 接口配置、系统提示词与高级设置预览](docs/image/预览.png)
 
 | 配置项 | 填写说明 |
 | --- | --- |
