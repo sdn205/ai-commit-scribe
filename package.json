@@ -240,10 +240,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sdn205/ai-commit-scribe.git"
+    "url": "https://github.com/Santonin205/ai-commit-scribe.git"
   },
-  "homepage": "https://github.com/sdn205/ai-commit-scribe#readme",
+  "homepage": "https://github.com/Santonin205/ai-commit-scribe#readme",
   "bugs": {
-    "url": "https://github.com/sdn205/ai-commit-scribe/issues"
+    "url": "https://github.com/Santonin205/ai-commit-scribe/issues"
   }
 }

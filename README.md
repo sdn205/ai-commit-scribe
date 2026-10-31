@@ -21,7 +21,7 @@
 
 需要 VS Code **1.93.0 或更高版本**、可用的 Git，以及一个支持上述请求格式的模型服务。
 
-从 [GitHub Releases](https://github.com/sdn205/ai-commit-scribe/releases/latest) 下载 `ai-commit-scribe-版本号.vsix` 安装包后：
+从 [GitHub Releases](https://github.com/Santonin205/ai-commit-scribe/releases/latest) 下载 `ai-commit-scribe-版本号.vsix` 安装包后：
 
 1. 打开 VS Code 的扩展面板。
 2. 点击右上角的 **…**，选择 **从 VSIX 安装…**（Install from VSIX）。
